@@ -1,0 +1,54 @@
+function [ch_ratio,ch_speed,isUrban,highlight_nature] = change_analysis(number_AlignedPixels,number_DifferentPixels,num_month,image_align)
+    %% change ratio
+    ch_ratio = number_DifferentPixels/number_AlignedPixels ;
+    
+    %% change speed
+    ch_speed = ch_ratio/num_month;
+    
+    %%
+    image_hsv=rgb2hsv(image_align);
+    [m,n,~]=size(image_hsv);
+    sum_pixels=m*n;
+    
+    %Set threshold for dividing green or blue areas
+    g=zeros(m,n);
+    b=zeros(m,n);
+    w=zeros(m,n);
+    
+    for i=1:m
+        for j=1:n
+            if(image_hsv(i,j,1)>35/180)&&(image_hsv(i,j,1)<90/180)&&(image_hsv(i,j,3)>46/255)&&(image_hsv(i,j,3)<221/255)
+                g(i,j)=1;
+            end
+            if(image_hsv(i,j,1)>100/180)&&(image_hsv(i,j,1)<125/180)&&(image_hsv(i,j,3)>46/255)&&(image_hsv(i,j,3)<221/255)
+                b(i,j)=1;
+            end
+            if (image_hsv(i,j,2)<30/255)&&(image_hsv(i,j,3)>211/255)
+                w(i,j)=1;
+            end
+        end
+    end
+    nature_ratio=(sum(g,'all')+sum(b,'all')+sum(w,'all'))/sum_pixels;
+    
+%     se = strel('line',11,90);
+%     vegetation = imerode(g,se);
+%     water_area = imerode(b,se);
+    
+    
+    %% location classification
+    % straight line detection
+    % Reference: From external resourse
+    lines = line_detector(image_align);
+    lineCount = size(lines,2);
+    if lineCount >=130 && nature_ratio<0.7
+        isUrban = true;
+        %fprintf('this changed area is urban');
+        highlight_nature=image_align+uint8(cat(3,g*0*255,g*0.5*255,g*0*255));
+    else 
+        isUrban = false;
+        %fprintf('this changed area is nature');
+        highlight_nature=image_align+uint8(cat(3,g*0*255,g*0.5*255,g*0*255))+uint8(cat(3,b*0*255,b*0*255,b*0.5*255))+uint8(cat(3,g*1*255,g*0.5*255,g*0*255));
+    end
+  
+    
+    
