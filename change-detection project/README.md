@@ -7,13 +7,13 @@
 
 ## Introduction to our folder
 change-detection project
-	|- main.m
-	|- gui.mlapp
-	|- Readme.txt
-	|- datesets
-	|- change_analysis
-	|- line_detection
-	|- image_registration
+	 |- main.m
+	 |- gui.mlapp
+	 |- Readme.txt
+	 |- datesets
+	 |- change_analysis
+	 |- line_detection
+     |- image_registration
 
 
 ## Overview
