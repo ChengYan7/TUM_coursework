@@ -5,16 +5,6 @@
 * Required toolbox:	Computer Vision Toolbox
 			Image Processing Toolbox
 
-## Introduction to our folder
-change-detection project
-	 |- main.m
-	 |- gui.mlapp
-	 |- Readme.txt
-	 |- datesets
-	 |- change_analysis
-	 |- line_detection
-     |- image_registration
-
 
 ## Overview
 This program is developed to show change in satellite images. The function is realized through the MATLAB programs in the folder 'G36'.
