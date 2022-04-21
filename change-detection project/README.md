@@ -6,14 +6,14 @@
 			Image Processing Toolbox
 
 ## Introduction to our folder
-	G36
-	 |- main.m
-	 |- gui.mlapp
-	 |- Readme.txt
-	 |- datesets
-	 |- change_analysis
-	 |- line_detection
-	     |- image_registration
+change-detection project
+	|- main.m
+	|- gui.mlapp
+	|- Readme.txt
+	|- datesets
+	|- change_analysis
+	|- line_detection
+	|- image_registration
 
 
 ## Overview
